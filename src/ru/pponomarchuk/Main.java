@@ -20,6 +20,7 @@ public class Main {
         node1.setLeftChild(node3);
 
         System.out.println(getSumByLayers(root));
+        System.out.println(getSumByRecursion(root));
     }
 
     private static int getSumByLayers(Node root) {
@@ -50,6 +51,17 @@ public class Main {
                 }
             }
             nodes = currentLayerNodes;
+        }
+        return sum;
+    }
+
+    private static int getSumByRecursion(Node root){
+        int sum = root.getValue();
+        if (root.getRightChild() != null) {
+            sum += getSumByRecursion(root.getRightChild());
+        }
+        if (root.getLeftChild() != null) {
+            sum += getSumByRecursion(root.getLeftChild());
         }
         return sum;
     }
