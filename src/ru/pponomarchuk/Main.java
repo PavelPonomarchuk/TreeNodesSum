@@ -1,6 +1,8 @@
 package ru.pponomarchuk;
 
+import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Queue;
 
 public class Main {
 
@@ -21,6 +23,7 @@ public class Main {
 
         System.out.println(getSumByLayers(root));
         System.out.println(getSumByRecursion(root));
+        System.out.println(getSumByBFS(root));
     }
 
     private static int getSumByLayers(Node root) {
@@ -62,6 +65,26 @@ public class Main {
         }
         if (root.getLeftChild() != null) {
             sum += getSumByRecursion(root.getLeftChild());
+        }
+        return sum;
+    }
+
+    private static int getSumByBFS(Node root) {
+        int sum = 0;
+        ArrayDeque<Node> nodesQueue = new ArrayDeque<>();
+        nodesQueue.add(root);
+        Node current;
+
+        while (nodesQueue.peekFirst() != null) {
+            current = nodesQueue.pollFirst();
+
+            if (current.getLeftChild() != null) {
+                nodesQueue.add(current.getLeftChild());
+            }
+            if (current.getRightChild() != null) {
+                nodesQueue.add(current.getRightChild());
+            }
+            sum += current.getValue();
         }
         return sum;
     }
