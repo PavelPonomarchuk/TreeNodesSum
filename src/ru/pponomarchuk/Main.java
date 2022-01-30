@@ -1,8 +1,6 @@
 package ru.pponomarchuk;
 
-import java.util.ArrayDeque;
-import java.util.ArrayList;
-import java.util.Queue;
+import java.util.*;
 
 public class Main {
 
@@ -29,7 +27,7 @@ public class Main {
     private static int getSumByLayers(Node root) {
         int sum = 0;
         boolean nextLayerExist = root.getLeftChild() != null || root.getRightChild() != null;
-        ArrayList<Node> nodes = new ArrayList<>();
+        List<Node> nodes = new ArrayList<>();
         nodes.add(root);
 
         if (!nextLayerExist) {
@@ -38,12 +36,12 @@ public class Main {
 
         while (nextLayerExist) {
             nextLayerExist = false;
-            ArrayList<Node> currentLayerNodes = new ArrayList<>();
+            List<Node> currentLayerNodes = new ArrayList<>();
 
-            for (Node item: nodes) {
+            for (Node item : nodes) {
                 sum += item.getValue();
 
-                if (item.getLeftChild() != null){
+                if (item.getLeftChild() != null) {
                     currentLayerNodes.add(item.getLeftChild());
                 }
                 if (item.getRightChild() != null) {
@@ -58,7 +56,7 @@ public class Main {
         return sum;
     }
 
-    private static int getSumByRecursion(Node root){
+    private static int getSumByRecursion(Node root) {
         int sum = root.getValue();
         if (root.getRightChild() != null) {
             sum += getSumByRecursion(root.getRightChild());
@@ -71,7 +69,7 @@ public class Main {
 
     private static int getSumByBFS(Node root) {
         int sum = 0;
-        ArrayDeque<Node> nodesQueue = new ArrayDeque<>();
+        Deque<Node> nodesQueue = new ArrayDeque<>();
         nodesQueue.add(root);
         Node current;
 
